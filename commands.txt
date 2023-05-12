@@ -1,3 +1,21 @@
+cd Documents/Studia/Chmury/zad1test/nginx-test-app
+
+// do uruchomienia
+
+docker build --build-arg -t testapp .
+
+
+docker run -d -p 8080:80 --name nginxtest testapp
+
+docker run -d -p 8080:80 -v $(pwd)/info.log:/var/log/info.log --name nginxtest testapp
+
+docker stop nginxtest
+docker rm nginxtest
+
+
+
+
+
 sudo ./buildkitd
 buildctl -v
 
@@ -21,14 +39,4 @@ buildctl build --frontend=dockerfile.v0 --local context=. --local dockerfile=. -
 
 
 
-cd Documents/Studia/Chmury/zad1test/nginx-test-app
-
-docker build -t testapp .
-
-
-docker run -d -p 8080:80 --name nginxtest testapp
-docker run -d -p 8080:80 -v $(pwd)/info.log:/var/log/info.log --name nginxtest testapp
-
-docker stop nginxtest
-docker rm nginxtest
 
