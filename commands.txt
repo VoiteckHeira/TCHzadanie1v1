@@ -1,0 +1,34 @@
+sudo ./buildkitd
+buildctl -v
+
+docker buildx create --name labbuilder
+
+docker buildx use labbuilder
+
+
+docker buildx inspect --bootstrap
+
+docker buildx ls
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
+
+
+buildctl build --frontend=dockerfile.v0 --local context=. --local dockerfile=. --export-cache type=inline --output=type=image,name=docker.io/voiteckheir/lab6:bkit2,push=true
+
+
+buildctl build --frontend=dockerfile.v0 --local context=. --local dockerfile=. --export-cache type=inline --import-cache type=registry,ref=docker.io/voiteckheir/lab6:bkit2 --output=type=image,name=docker.io/voiteckheir/lab6:bkit2,push=true
+
+
+
+
+cd Documents/Studia/Chmury/zad1test/nginx-test-app
+
+docker build -t testapp .
+
+
+docker run -d -p 8080:80 --name nginxtest testapp
+docker run -d -p 8080:80 -v $(pwd)/info.log:/var/log/info.log --name nginxtest testapp
+
+docker stop nginxtest
+docker rm nginxtest
+
