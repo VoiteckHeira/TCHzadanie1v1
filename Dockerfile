@@ -21,7 +21,7 @@ FROM nginx
 
 ARG VERSION
 
-LABEL org.opencontaine rs.image.version="$VERSION"
+LABEL org.opencontainers.image.version="$VERSION"
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf 
 
